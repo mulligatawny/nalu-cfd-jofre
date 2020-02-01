@@ -348,6 +348,9 @@ AssembleMomentumEdgeOpenSolverAlgorithm::execute()
             p_lhs[rRiR] += tmdot;
           }
         }
+#if 1
+        // Lluis: modification for axisymmetric jet case
+#else
         else {
           // entraining; constrain to be normal
           for ( int i = 0; i < nDim; ++i ) {
@@ -374,6 +377,7 @@ AssembleMomentumEdgeOpenSolverAlgorithm::execute()
 
           }
         }
+#endif
       }
 
       apply_coeff(connected_nodes, scratchIds, scratchVals, rhs, lhs, __FILE__);

@@ -21,8 +21,9 @@ SinProfileChannelFlowVelocityAuxFunction::SinProfileChannelFlowVelocityAuxFuncti
   const unsigned beginPos,
   const unsigned endPos) :
   AuxFunction(beginPos, endPos),
-    u_m(10.0) /*,		// bulk velocity
-    pi_(acos(-1.0)) */
+    //u_m(10.0),		// bulk velocity
+    u_m(20.0),		// bulk velocity
+    pi_(acos(-1.0))
 {
   // does nothing
 }
@@ -41,14 +42,17 @@ SinProfileChannelFlowVelocityAuxFunction::do_evaluate(
   for(unsigned p=0; p < numPoints; ++p) {
 
     const double x = coords[0];
+    //const double x = coords[0] + 2.0*pi_;
     const double y = coords[1];
     const double z = coords[2];
+    //const double z = coords[2] + pi_;
 
     const double aux_x = (y > 1) ? 1.0 : -1.0;
+    //const double aux_x = (y > 0) ? 1.0 : -1.0;
 
     fieldPtr[0] = u_m*sin(x)*aux_x;
-    fieldPtr[1] = 0.1*u_m*sin(y);
-    fieldPtr[2] = 0.1*u_m*sin(z);
+    fieldPtr[1] = 0.5*u_m*sin(y);
+    fieldPtr[2] = 0.5*u_m*sin(z);
 
     fieldPtr += fieldSize;
     coords += spatialDimension;

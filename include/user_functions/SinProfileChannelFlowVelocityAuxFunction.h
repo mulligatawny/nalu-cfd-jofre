@@ -37,6 +37,7 @@ public:
   
 private:
   const double u_m;
+  const double pi_;
 };
 
 } // namespace nalu
